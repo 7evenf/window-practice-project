@@ -1,22 +1,21 @@
-const modals = (modalSelector, triggerSelector, closeSelector, closeClickOverlay = true) => {
+export const closeModal = () => {
+	const	windows = document.querySelectorAll('[data-modal]');
+
+	windows.forEach(item => item.classList.remove('show'));
+
+	document.body.classList.remove('modal-open');
+};
+
+const modals = (modalSelector, triggerSelector, closeSelector, modalState, closeClickOverlay = true) => {
 	const modal = document.querySelector(modalSelector),
 		trigger = document.querySelectorAll(triggerSelector),
-		close = document.querySelector(closeSelector),
-		windows = document.querySelectorAll('[data-modal]');
+		close = document.querySelector(closeSelector);
 
 	const showModal = () => {
 		modal.classList.add('show');
 		document.body.classList.add('modal-open');
 
 		clearInterval(timeoutId);
-	};
-
-	const closeModal = () => {
-		windows.forEach(item => item.classList.remove('show'));
-
-		modal.classList.remove('show');
-
-		document.body.classList.remove('modal-open');
 	};
 	
 	trigger.forEach(item => {
@@ -25,16 +24,21 @@ const modals = (modalSelector, triggerSelector, closeSelector, closeClickOverlay
 				e.preventDefault();
 			}
 
-			windows.forEach(item => item.classList.remove('show'));
+			if (modal.classList.contains('popup_calc_profile')) {
+				if (Object.values(modalState).length < 3) return;
+			} else if (modal.classList.contains('popup_calc_end')) {
+				if (Object.values(modalState).length < 5) return;
+			}
+			
 
-			closeModal();
+			closeModal(modalSelector, '[data-modal]');
 			showModal();
 		});
 	});
 
 	modal.addEventListener('click', (e) => {
 		if ((e.target === modal && closeClickOverlay) || e.target == close) {
-			closeModal();
+			closeModal(modalSelector, '[data-modal]');
 		}
 	});	
 
