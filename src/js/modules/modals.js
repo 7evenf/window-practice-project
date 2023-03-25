@@ -3,7 +3,7 @@ export const closeModal = () => {
 
 	windows.forEach(item => item.classList.remove('show'));
 
-	document.body.classList.remove('modal-open');
+	document.documentElement.classList.remove('modal-open');
 };
 
 const modals = (modalSelector, triggerSelector, closeSelector, modalState, closeClickOverlay = true) => {
@@ -13,7 +13,7 @@ const modals = (modalSelector, triggerSelector, closeSelector, modalState, close
 
 	const showModal = () => {
 		modal.classList.add('show');
-		document.body.classList.add('modal-open');
+		document.documentElement.classList.add('modal-open');
 
 		clearInterval(timeoutId);
 	};

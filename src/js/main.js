@@ -4,6 +4,7 @@ import tabs from './modules/tabs';
 import forms from './modules/forms';
 import changeModalState from './modules/changeModalState';
 import timer from './modules/timer';
+import images from './modules/images';
 
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
@@ -25,4 +26,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	modals('.popup_calc_profile', '.popup_calc_button', '.popup_calc_profile_close strong', modalState, false);
 	modals('.popup_calc_end', '.popup_calc_profile_button', '.popup_calc_end_close strong', modalState, false);
 	timer(deadline, '.container1');
+	images();
 });
